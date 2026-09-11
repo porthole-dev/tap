@@ -1,0 +1,15 @@
+[Desktop Entry]
+Name=Tap
+Comment=Read and write NFC tags
+Keywords=NFC;Tag;NDEF;Contactless;Scan;
+Exec=tap
+Icon=io.github.jertlok.Tap
+Terminal=false
+Type=Application
+Categories=GTK;Utility;
+StartupNotify=true
+# phosh runs with app-filter-mode=['adaptive'] and hides anything that does not
+# say it works at phone size behind a "show all apps" toggle. Tap is built for
+# 360px, so it says so. Mobile Settings, Phosh Tour and g4music use this same
+# key -- it is what phosh reads.
+X-Purism-FormFactor=Workstation;Mobile;

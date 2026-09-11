@@ -1,0 +1,6 @@
+data/io.github.jertlok.Tap.desktop.in
+data/io.github.jertlok.Tap.metainfo.xml.in
+src/main.c
+src/tap-nfc.c
+src/tap-window.c
+src/tap-window.blp

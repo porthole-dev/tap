@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg height="128px" viewBox="0 0 128 128" width="128px" xmlns="http://www.w3.org/2000/svg">
+    <!-- An NFC tag, built the way Adwaita's own app icons are: no blur
+         filters anywhere, a copy of the shape offset downward for the edge,
+         a diagonal gradient body, and a flat glyph, all in GNOME palette
+         colours. org.gnome.Console.svg is the same four layers.
+
+         Every coordinate here is derived from a centre, because the first
+         version of this icon was not: the glyph box is 58 wide, it was placed
+         at x=47, and so it sat 12px right of the card's centre. Measured, the
+         object's ink is now 102x96 at +13+16 on a 128 canvas.
+
+         The glyph is the NFC Forum N-Mark in black on white, the rendering
+         its own usage guidelines describe. Not copyrightable (simple
+         geometric shapes, CC0 on Wikimedia Commons) but a registered
+         trademark, so shipping it needs their free click-through licence.
+
+         This comment sits inside the root element and contains no double
+         hyphen. Both matter: a long comment ahead of the svg tag pushes the
+         format signature out of gdk-pixbuf's sniffing window, and a double
+         hyphen is illegal inside an XML comment. Either one makes the icon
+         fail to load in the app grid and in the portal's permission dialog,
+         while GTK4's own loader renders it fine. -->
+    <linearGradient id="edge" gradientUnits="userSpaceOnUse" x1="14.0" x2="114.0" y1="64" y2="64">
+        <stop offset="0" stop-color="#9a9996"/>
+        <stop offset="0.05" stop-color="#ffffff"/>
+        <stop offset="0.1" stop-color="#deddda"/>
+        <stop offset="0.9" stop-color="#c0bfbc"/>
+        <stop offset="0.95" stop-color="#ffffff"/>
+        <stop offset="1" stop-color="#9a9996"/>
+    </linearGradient>
+    <linearGradient id="body" gradientUnits="userSpaceOnUse" x1="14.0" x2="114.0" y1="17.0" y2="103.0">
+        <stop offset="0" stop-color="#ffffff"/>
+        <stop offset="0.45" stop-color="#f6f5f4"/>
+        <stop offset="1" stop-color="#deddda"/>
+    </linearGradient>
+    <rect x="14.0" y="25.0" width="100" height="86" rx="12" fill="url(#edge)"/>
+    <rect x="14.0" y="17.0" width="100" height="86" rx="12" fill="url(#body)"/>
+    <rect x="16.0" y="19.0" width="96" height="82" rx="10" fill="#fafafa"/>
+    <g transform="translate(35.0,31.0) scale(0.03625)" fill="#241f31">
+        <g transform="translate(0,1600) scale(0.1,-0.1)">
+            <path d="M2697 15989 c-565 -50 -1108 -264 -1567 -619 -114 -88 -391 -362 -484 -480 -164 -206 -340 -509 -434 -745 -84 -211 -143 -430 -184 -680 l-23 -140 -3 -5105 c-2 -3709 0 -5145 8 -5250 70 -905 549 -1724 1304 -2229 357 -239 778 -402 1203 -466 209 -32 404 -36 1438 -33 l1030 3 -50 29 c-473 272 -900 980 -1135 1880 -136 521 -200 952 -262 1766 -9 116 -13 1563 -15 5719 l-3 5564 59 -54 c33 -30 1450 -1433 3150 -3119 l3091 -3065 0 -960 0 -960 -167 166 c-276 272 -3662 3637 -4288 4261 l-580 578 -3 -3028 c-3 -3056 0 -3387 34 -3957 76 -1289 257 -2251 558 -2968 58 -138 195 -404 271 -527 156 -251 434 -560 648 -719 357 -266 779 -449 1320 -571 l177 -41 2633 4 c2894 3 2667 -2 2983 62 961 194 1787 893 2148 1816 86 221 140 430 183 709 16 108 18 413 21 5185 2 3454 0 5117 -8 5217 -19 278 -61 490 -144 743 -374 1126 -1377 1914 -2561 2015 -72 6 -555 10 -1200 10 l-1080 0 58 -33 c100 -56 179 -119 297 -237 465 -463 808 -1273 979 -2310 54 -329 89 -654 123 -1145 8 -125 12 -1627 15 -5704 l4 -5533 -39 33 c-22 19 -1074 1060 -2338 2314 -1264 1254 -2665 2642 -3111 3085 l-813 805 0 964 0 963 1853 -1843 c1018 -1014 2152 -2143 2520 -2508 l667 -665 0 3025 c0 1749 -4 3153 -10 3329 -57 1794 -274 2992 -695 3838 -153 308 -311 536 -525 756 -221 227 -441 386 -735 531 -266 131 -536 223 -883 301 l-154 34 -2596 -1 c-1429 -1 -2636 -5 -2685 -10z"/>
+        </g>
+    </g>
+</svg>

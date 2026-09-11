@@ -1,0 +1,149 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $TapWindow: Adw.ApplicationWindow {
+  title: _("Tap");
+  default-width: 400;
+  default-height: 700;
+
+  // The phone this was written on is 360 logical points wide. Nothing here
+  // may ask for more than that.
+  width-request: 360;
+  height-request: 294;
+
+  content: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      [end]
+      MenuButton {
+        primary: true;
+        icon-name: "open-menu-symbolic";
+        tooltip-text: _("Main Menu");
+        menu-model: primary_menu;
+      }
+    }
+
+    content: Adw.ToastOverlay toast_overlay {
+      Stack stack {
+        // A short crossfade, not the 200ms default. Removing it altogether
+        // was worse: the pages it moves between differ completely, so an
+        // instant swap reads as a flash. What it must not do is dominate the
+        // event it is reporting, hence 120ms.
+        transition-type: crossfade;
+        transition-duration: 120;
+
+        StackPage {
+          name: "starting";
+
+          // Deliberately empty. Until the portal answers there is nothing
+          // true to say, and saying "Connecting..." for the 200ms it usually
+          // takes just puts a page on screen to replace it immediately.
+          child: Adw.Bin {};
+        }
+
+        StackPage {
+          name: "message";
+
+          child: Adw.StatusPage message_page {
+            child: Button action_button {
+              halign: center;
+              visible: false;
+              clicked => $on_action_clicked(template);
+
+              styles [
+                "pill",
+                "suggested-action",
+              ]
+            };
+          };
+        }
+
+        StackPage {
+          name: "scanning";
+
+          child: Adw.StatusPage {
+            icon-name: "io.github.jertlok.Tap-symbolic";
+            title: _("Ready to Scan");
+            description: _("Hold a tag against the back of the device. On most phones the antenna is in the upper half.");
+
+            child: Adw.Spinner {
+              halign: center;
+              width-request: 32;
+              height-request: 32;
+            };
+          };
+        }
+
+        StackPage {
+          name: "tag";
+
+          child: ScrolledWindow {
+            hscrollbar-policy: never;
+
+            child: Adw.PreferencesPage {
+              Adw.PreferencesGroup {
+                title: _("Tag");
+
+                Adw.ActionRow type_row {
+                  // The subtitle is whatever the tag said. Not markup.
+                  use-markup: false;
+                  title: _("Type");
+
+                  styles [
+                    "property",
+                  ]
+                }
+
+                Adw.ActionRow protocol_row {
+                  // The subtitle is whatever the tag said. Not markup.
+                  use-markup: false;
+                  title: _("Protocol");
+
+                  styles [
+                    "property",
+                  ]
+                }
+
+                Adw.ActionRow uid_row {
+                  // The subtitle is whatever the tag said. Not markup.
+                  use-markup: false;
+                  title: _("Unique Identifier");
+
+                  styles [
+                    "property",
+                  ]
+                }
+              }
+
+              Adw.PreferencesGroup records_group {
+                title: _("Records");
+              }
+
+              Adw.PreferencesGroup {
+                Button write_button {
+                  halign: center;
+                  label: _("Write to Tag…");
+                  clicked => $on_write_clicked(template);
+
+                  styles [
+                    "pill",
+                    "suggested-action",
+                  ]
+                }
+              }
+            };
+          };
+        }
+      }
+    };
+  };
+}
+
+menu primary_menu {
+  section {
+    item {
+      label: _("_About Tap");
+      action: "app.about";
+    }
+  }
+}

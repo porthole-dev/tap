@@ -1,0 +1,49 @@
+{
+    "id" : "io.github.jertlok.Tap",
+    "runtime" : "org.gnome.Platform",
+    "runtime-version" : "50",
+    "sdk" : "org.gnome.Sdk",
+    "command" : "tap",
+    "finish-args" : [
+        "--share=ipc",
+        "--socket=wayland",
+        "--socket=fallback-x11",
+        "--device=dri",
+        "--talk-name=org.gnome.Settings"
+    ],
+    "//" : [
+        "There is deliberately no --socket=system-bus and no --talk-name for",
+        "org.neard. Reaching neard directly would hand this app the whole",
+        "system bus -- a far larger grant than 'may read a tag' -- and would",
+        "bypass the portal this app exists to demonstrate. The portal is on",
+        "the session bus, which every sandbox may already talk to.",
+        "",
+        "--talk-name=org.gnome.Settings is for the 'Open NFC Settings' button,",
+        "which calls Settings' own launch-panel action. Without it the button",
+        "does nothing in a sandbox; it is not needed for NFC itself.",
+        "",
+        "org.gnome.Sdk has carried blueprint-compiler since 45, so it is not",
+        "built as a module here. If a runtime ever drops it, add it back as",
+        "a simple meson module before this one."
+    ],
+    "cleanup" : [
+        "/include",
+        "/lib/pkgconfig",
+        "/share/pkgconfig",
+        "*.la",
+        "*.a"
+    ],
+    "modules" : [
+        {
+            "name" : "tap",
+            "builddir" : true,
+            "buildsystem" : "meson",
+            "sources" : [
+                {
+                    "type" : "dir",
+                    "path" : ".."
+                }
+            ]
+        }
+    ]
+}

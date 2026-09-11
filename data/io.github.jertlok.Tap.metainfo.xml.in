@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2026 Giuseppe Maggio -->
+<component type="desktop-application">
+  <id>io.github.jertlok.Tap</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+
+  <name>Tap</name>
+  <summary>Read and write NFC tags</summary>
+
+  <description>
+    <p>
+      Hold a contactless tag or card against your device and Tap shows what it
+      is: its type, its protocol, its unique identifier and any NDEF records
+      it carries. With a writable tag in the field, Tap can store a piece of
+      text or a link on it.
+    </p>
+    <p>
+      Tap reaches the reader through the NFC portal, so it never needs access
+      to the system bus and cannot switch the radio on behind your back. That
+      switch stays yours, in Settings.
+    </p>
+  </description>
+
+  <launchable type="desktop-id">io.github.jertlok.Tap.desktop</launchable>
+
+  <developer id="io.github.jertlok">
+    <name translatable="no">Giuseppe Maggio</name>
+  </developer>
+
+  <url type="homepage">https://github.com/Jertlok/tap</url>
+  <url type="bugtracker">https://github.com/Jertlok/tap/issues</url>
+
+  <requires>
+    <display_length compare="ge">360</display_length>
+  </requires>
+  <recommends>
+    <control>touch</control>
+    <control>pointing</control>
+    <control>keyboard</control>
+  </recommends>
+
+  <content_rating type="oars-1.1"/>
+
+  <releases>
+    <release version="0.1.0" date="2026-09-10">
+      <description>
+        <p>First release: read a tag, write a text or link record to one.</p>
+      </description>
+    </release>
+  </releases>
+</component>
