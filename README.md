@@ -1,3 +1,10 @@
+> **Unofficial.** Not affiliated with or endorsed by postmarketOS or GNOME.
+> Do not report problems with this app to them; open an issue here.
+>
+> **Experimental.** No warranty, see [COPYING](COPYING).
+>
+> **AI-assisted.** See [AI.md](AI.md).
+
 # Tap
 
 Read and write NFC tags, through `org.freedesktop.portal.NFC`.
@@ -58,15 +65,31 @@ a packaging change and not a design one.
 meson setup _build
 meson compile -C _build
 meson test -C _build          # validates the desktop and metainfo files
+meson install -C _build
 ```
 
 Needs GTK 4.14, libadwaita 1.6 and `blueprint-compiler` at build time.
 
-For the device, the aport is `pmaports/temp/tap`; for the sandbox, the
-manifest is `build-aux/io.github.porthole_dev.Tap.json`.
+As a Flatpak, the manifest is `build-aux/io.github.porthole_dev.Tap.json`:
+
+```sh
+flatpak-builder --user --install --force-clean _flatpak build-aux/io.github.porthole_dev.Tap.json
+```
+
+On postmarketOS, the package is `temp/tap` in
+[porthole-dev/pmaports](https://github.com/porthole-dev/pmaports), built from
+this repository's release tarballs.
 
 ## The icon is a placeholder
 
 Both icons are working placeholders drawn from the same wave geometry as the
 NFC page in Settings. GNOME designers redraw these; saying so up front is
 cheaper than defending one.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Licence
+
+GPL-3.0-or-later, see [COPYING](COPYING).
