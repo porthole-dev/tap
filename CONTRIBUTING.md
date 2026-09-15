@@ -28,7 +28,7 @@ meson test -C _build
 ```
 
 CI runs the same build and tests (`.github/workflows/ci.yml`), plus the
-trailer and sign-off check in `.github/scripts/commit-check.sh`.
+organization's commit check (trailers and sign-off, `porthole-dev/.github`).
 
 ## Releases
 

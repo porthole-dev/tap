@@ -1,19 +1,24 @@
-# Build, test, and check commit trailers on pushes to main and on every pull
-# request. Tags run the release workflow instead, and a branch is checked by its
-# pull request.
+# Build, test, and check commits on pushes to main, pull requests and merge
+# groups, and weekly against the moving alpine:edge image. Tags run the release
+# workflow instead, and a branch is checked by its pull request.
 name: CI
 
 on:
   push:
     branches: [main]
   pull_request:
+  merge_group:
+  schedule:
+    - cron: "29 4 * * 1"
+  workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: ci-${{ github.ref }}
-  cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  # Superseded pull request runs are cancelled; every push to main keeps its result.
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 env:
   DEPENDENCIES: >-
@@ -24,9 +29,15 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-24.04
-    container: docker.io/library/alpine:edge
+    timeout-minutes: 15
+    # The distribution the app ships to, deliberately unpinned; the weekly
+    # run catches breakage it brings.
+    container: docker.io/library/alpine:edge # zizmor: ignore[unpinned-images]
     steps:
-      - run: apk add --no-cache $DEPENDENCIES
+      - name: Dependencies
+        run: |
+          # shellcheck disable=SC2086 # a list of packages
+          apk add --no-cache $DEPENDENCIES
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
@@ -37,9 +48,13 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-24.04
-    container: docker.io/library/alpine:edge
+    timeout-minutes: 15
+    container: docker.io/library/alpine:edge # zizmor: ignore[unpinned-images]
     steps:
-      - run: apk add --no-cache $DEPENDENCIES
+      - name: Dependencies
+        run: |
+          # shellcheck disable=SC2086 # a list of packages
+          apk add --no-cache $DEPENDENCIES
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
@@ -50,17 +65,27 @@ jobs:
   commit-check:
     name: Commit check
     runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: porthole-dev/.github/actions/commit-check@2d4d1186816e5bc3997e08b490f464082f70e85f # main
+
+  workflow-lint:
+    name: Workflow lint
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          fetch-depth: 100
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           persist-credentials: false
-      - name: Test the check
-        run: sh .github/scripts/test-commit-check.sh
-      - name: Check trailers and DCO sign-off
-        run: |
-          base=$(sh .github/scripts/base-commit.sh)
-          if [ -z "$base" ]; then echo "no new commits"; exit 0; fi
-          sh .github/scripts/commit-check.sh "$base" HEAD \
-            ${{ github.event_name == 'pull_request' && '--dco' || '' }}
+      - uses: porthole-dev/.github/actions/workflow-lint@2d4d1186816e5bc3997e08b490f464082f70e85f # main
+
+  ci-passed:
+    name: CI passed
+    if: ${{ !cancelled() }}
+    needs: [build, test, commit-check, workflow-lint]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: porthole-dev/.github/actions/ci-passed@2d4d1186816e5bc3997e08b490f464082f70e85f # main
+        with:
+          results: ${{ join(needs.*.result, ' ') }}
