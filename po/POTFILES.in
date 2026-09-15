@@ -1,5 +1,5 @@
-data/io.github.jertlok.Tap.desktop.in
-data/io.github.jertlok.Tap.metainfo.xml.in
+data/io.github.porthole_dev.Tap.desktop.in
+data/io.github.porthole_dev.Tap.metainfo.xml.in
 src/main.c
 src/tap-nfc.c
 src/tap-window.c

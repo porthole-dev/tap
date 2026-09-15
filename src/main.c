@@ -39,7 +39,7 @@ on_about (GSimpleAction *action,
    * already written down there, and an About dialog that restates them in C
    * is a second copy to drift. What is left here is what appdata has no field
    * for. */
-  dialog = adw_about_dialog_new_from_appdata ("/io/github/jertlok/Tap/io.github.jertlok.Tap.metainfo.xml",
+  dialog = adw_about_dialog_new_from_appdata ("/io/github/porthole_dev/Tap/io.github.porthole_dev.Tap.metainfo.xml",
                                               APP_VERSION);
 
   adw_about_dialog_set_developers (ADW_ABOUT_DIALOG (dialog), developers);

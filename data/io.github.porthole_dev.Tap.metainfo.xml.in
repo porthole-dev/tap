@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright 2026 Giuseppe Maggio -->
 <component type="desktop-application">
-  <id>io.github.jertlok.Tap</id>
+  <id>io.github.porthole_dev.Tap</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
 
@@ -22,14 +22,14 @@
     </p>
   </description>
 
-  <launchable type="desktop-id">io.github.jertlok.Tap.desktop</launchable>
+  <launchable type="desktop-id">io.github.porthole_dev.Tap.desktop</launchable>
 
-  <developer id="io.github.jertlok">
+  <developer id="io.github.porthole_dev">
     <name translatable="no">Giuseppe Maggio</name>
   </developer>
 
-  <url type="homepage">https://github.com/Jertlok/tap</url>
-  <url type="bugtracker">https://github.com/Jertlok/tap/issues</url>
+  <url type="homepage">https://github.com/porthole-dev/tap</url>
+  <url type="bugtracker">https://github.com/porthole-dev/tap/issues</url>
 
   <requires>
     <display_length compare="ge">360</display_length>

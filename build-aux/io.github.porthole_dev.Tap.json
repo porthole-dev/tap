@@ -1,5 +1,5 @@
 {
-    "id" : "io.github.jertlok.Tap",
+    "id" : "io.github.porthole_dev.Tap",
     "runtime" : "org.gnome.Platform",
     "runtime-version" : "50",
     "sdk" : "org.gnome.Sdk",

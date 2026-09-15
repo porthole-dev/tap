@@ -11,7 +11,7 @@ gnome = import('gnome')
 # One app id, used for the binary's application id, the .desktop, the
 # metainfo, the icons, the GResource prefix and the Flatpak id. Everything
 # that has to agree derives from this line.
-app_id = 'io.github.jertlok.Tap'
+app_id = 'io.github.porthole_dev.Tap'
 
 config_h = configuration_data()
 config_h.set_quoted('APP_ID', app_id)

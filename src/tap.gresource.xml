@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-  <gresource prefix="/io/github/jertlok/Tap">
+  <gresource prefix="/io/github/porthole_dev/Tap">
     <file preprocess="xml-stripblanks">tap-window.ui</file>
     <!-- The About dialog is built from this, the way GNOME's own apps do it. -->
-    <file preprocess="xml-stripblanks">io.github.jertlok.Tap.metainfo.xml</file>
+    <file preprocess="xml-stripblanks">io.github.porthole_dev.Tap.metainfo.xml</file>
   </gresource>
 </gresources>

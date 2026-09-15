@@ -63,7 +63,7 @@ meson test -C _build          # validates the desktop and metainfo files
 Needs GTK 4.14, libadwaita 1.6 and `blueprint-compiler` at build time.
 
 For the device, the aport is `pmaports/temp/tap`; for the sandbox, the
-manifest is `build-aux/io.github.jertlok.Tap.json`.
+manifest is `build-aux/io.github.porthole_dev.Tap.json`.
 
 ## The icon is a placeholder
 

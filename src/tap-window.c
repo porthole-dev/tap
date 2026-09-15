@@ -213,7 +213,7 @@ show_tag (TapWindow *self)
 static void
 show_message (TapWindow *self)
 {
-  const char *icon = "io.github.jertlok.Tap-symbolic";
+  const char *icon = "io.github.porthole_dev.Tap-symbolic";
   const char *title;
   const char *description;
   const char *button = NULL;
@@ -641,7 +641,7 @@ tap_window_class_init (TapWindowClass *klass)
   object_class->dispose = tap_window_dispose;
 
   gtk_widget_class_set_template_from_resource (widget_class,
-                                               "/io/github/jertlok/Tap/tap-window.ui");
+                                               "/io/github/porthole_dev/Tap/tap-window.ui");
 
   gtk_widget_class_bind_template_child (widget_class, TapWindow, toast_overlay);
   gtk_widget_class_bind_template_child (widget_class, TapWindow, stack);
