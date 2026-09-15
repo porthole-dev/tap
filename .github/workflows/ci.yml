@@ -1,0 +1,60 @@
+# Build, test, and check commit trailers on every push and pull request.
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  DEPENDENCIES: >-
+    build-base meson blueprint-compiler gettext-dev glib-dev gtk4.0-dev
+    libadwaita-dev desktop-file-utils appstream
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    container: docker.io/library/alpine:edge
+    steps:
+      - run: apk add --no-cache $DEPENDENCIES
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - run: meson setup _build
+      - run: meson compile -C _build
+      - run: DESTDIR="$PWD/_install" meson install -C _build --no-rebuild
+
+  test:
+    runs-on: ubuntu-24.04
+    container: docker.io/library/alpine:edge
+    steps:
+      - run: apk add --no-cache $DEPENDENCIES
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - run: meson setup _build
+      - name: Validate the desktop and metainfo files
+        run: meson test -C _build --print-errorlogs
+
+  commit-check:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 100
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Test the check
+        run: sh .github/scripts/test-commit-check.sh
+      - name: Check trailers and DCO sign-off
+        run: |
+          base=$(sh .github/scripts/base-commit.sh)
+          if [ -z "$base" ]; then echo "no new commits"; exit 0; fi
+          sh .github/scripts/commit-check.sh "$base" HEAD \
+            ${{ github.event_name == 'pull_request' && '--dco' || '' }}
