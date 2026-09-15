@@ -1,8 +1,11 @@
-# Build, test, and check commit trailers on every push and pull request.
+# Build, test, and check commit trailers on pushes to main and on every pull
+# request. Tags run the release workflow instead, and a branch is checked by its
+# pull request.
 name: CI
 
 on:
   push:
+    branches: [main]
   pull_request:
 
 permissions:
@@ -19,6 +22,7 @@ env:
 
 jobs:
   build:
+    name: Build
     runs-on: ubuntu-24.04
     container: docker.io/library/alpine:edge
     steps:
@@ -31,6 +35,7 @@ jobs:
       - run: DESTDIR="$PWD/_install" meson install -C _build --no-rebuild
 
   test:
+    name: Test
     runs-on: ubuntu-24.04
     container: docker.io/library/alpine:edge
     steps:
@@ -43,6 +48,7 @@ jobs:
         run: meson test -C _build --print-errorlogs
 
   commit-check:
+    name: Commit check
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
