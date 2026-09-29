@@ -1,10 +1,53 @@
 # Tap
 
+[Website](https://porthole-dev.github.io/porthole/) · [Downloads](https://porthole-dev.github.io/porthole/downloads/) · [Device support](https://porthole-dev.github.io/porthole/devices/)
+
 Read and write NFC tags, through `org.freedesktop.portal.NFC`.
 
 Hold a tag against the back of the device and Tap shows its type, its
 protocol, its UID and any NDEF records on it. With a writable tag in the
 field it can store a text or a link record.
+
+## Build from source
+
+```sh
+meson setup _build
+meson compile -C _build
+meson test -C _build          # validates the desktop and metainfo files
+meson install -C _build
+```
+
+Needs GTK 4.14, libadwaita 1.6 and `blueprint-compiler` at build time.
+
+As a Flatpak, the manifest is `build-aux/io.github.porthole_dev.Tap.json`:
+
+```sh
+flatpak-builder --user --install --force-clean _flatpak build-aux/io.github.porthole_dev.Tap.json
+```
+
+On Nura, the package is `temp/tap` in
+[porthole-dev/pmaports](https://github.com/porthole-dev/pmaports), built from
+this repository's release tarballs.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Licence
+
+GPL-3.0-or-later, see [COPYING](COPYING).
+
+## Project links
+
+[Device support](https://github.com/porthole-dev/porthole) ·
+[Packaged builds](https://github.com/porthole-dev/pmos-packages) ·
+[Contribution policy](https://github.com/porthole-dev/.github/blob/main/CONTRIBUTING.md)
+
+Independent project; not endorsed by Nura or GNOME. See [AI.md](AI.md)
+for the assistance policy.
+
+<details>
+<summary><strong>Portal integration and permissions</strong></summary>
 
 ## What talking to the portal costs
 
@@ -43,46 +86,4 @@ in its own permission screen rather than claiming a permission model it does
 not have there. The fix is a portal rebuild with `-Dsystemd=enabled`, which is
 a packaging change and not a design one.
 
-## Building
-
-```sh
-meson setup _build
-meson compile -C _build
-meson test -C _build          # validates the desktop and metainfo files
-meson install -C _build
-```
-
-Needs GTK 4.14, libadwaita 1.6 and `blueprint-compiler` at build time.
-
-As a Flatpak, the manifest is `build-aux/io.github.porthole_dev.Tap.json`:
-
-```sh
-flatpak-builder --user --install --force-clean _flatpak build-aux/io.github.porthole_dev.Tap.json
-```
-
-On Nura, the package is `temp/tap` in
-[porthole-dev/pmaports](https://github.com/porthole-dev/pmaports), built from
-this repository's release tarballs.
-
-## The icon is a placeholder
-
-Both icons are working placeholders drawn from the same wave geometry as the
-NFC page in Settings. GNOME designers redraw these; saying so up front is
-cheaper than defending one.
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md).
-
-## Licence
-
-GPL-3.0-or-later, see [COPYING](COPYING).
-
-## Project links
-
-[Device support](https://github.com/porthole-dev/porthole) ·
-[Packaged builds](https://github.com/porthole-dev/pmos-packages) ·
-[Contribution policy](https://github.com/porthole-dev/.github/blob/main/CONTRIBUTING.md)
-
-Independent project; not endorsed by Nura or GNOME. See [AI.md](AI.md)
-for the assistance policy.
+</details>
