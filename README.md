@@ -1,10 +1,3 @@
-> **Unofficial.** Not affiliated with or endorsed by postmarketOS or GNOME.
-> Do not report problems with this app to them; open an issue here.
->
-> **Experimental.** No warranty, see [COPYING](COPYING).
->
-> **AI-assisted.** See [AI.md](AI.md).
-
 # Tap
 
 Read and write NFC tags, through `org.freedesktop.portal.NFC`.
@@ -12,15 +5,6 @@ Read and write NFC tags, through `org.freedesktop.portal.NFC`.
 Hold a tag against the back of the device and Tap shows its type, its
 protocol, its UID and any NDEF records on it. With a writable tag in the
 field it can store a text or a link record.
-
-## Why C
-
-Because `gnome-control-center` is C, and Tap exists to be read next to it:
-the NFC page in Settings, the portal in `xdg-desktop-portal` and this app are
-one piece of work, and a reader who follows the permission from the switch to
-the grant to the tag should not change language twice on the way. Python and
-GJS both run on the target device and either would have been a legitimate
-GNOME choice; C is the one that matches the surrounding tree.
 
 ## What talking to the portal costs
 
@@ -76,7 +60,7 @@ As a Flatpak, the manifest is `build-aux/io.github.porthole_dev.Tap.json`:
 flatpak-builder --user --install --force-clean _flatpak build-aux/io.github.porthole_dev.Tap.json
 ```
 
-On postmarketOS, the package is `temp/tap` in
+On Nura, the package is `temp/tap` in
 [porthole-dev/pmaports](https://github.com/porthole-dev/pmaports), built from
 this repository's release tarballs.
 
@@ -93,3 +77,12 @@ See [CONTRIBUTING.md](CONTRIBUTING.md).
 ## Licence
 
 GPL-3.0-or-later, see [COPYING](COPYING).
+
+## Project links
+
+[Device support](https://github.com/porthole-dev/porthole) ·
+[Packaged builds](https://github.com/porthole-dev/pmos-packages) ·
+[Contribution policy](https://github.com/porthole-dev/.github/blob/main/CONTRIBUTING.md)
+
+Independent project; not endorsed by Nura or GNOME. See [AI.md](AI.md)
+for the assistance policy.
