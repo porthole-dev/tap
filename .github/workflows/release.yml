@@ -36,7 +36,7 @@ jobs:
       id-token: write # sign the provenance attestation
       attestations: write # store the provenance attestation
       artifact-metadata: write # record the attested artifact
-    uses: porthole-dev/.github/.github/workflows/app-release.yml@efe4230d0271f39f3fdf105cb905165340512b9e # shared release automation
+    uses: porthole-dev/.github/.github/workflows/app-release.yml@55fae9480ac477dd875ffce4471b5f5fc93cc0a6 # shared release automation
     with:
       aport: temp/tap
       tag: ${{ inputs.tag || github.ref_name }}
