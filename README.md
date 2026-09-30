@@ -1,6 +1,6 @@
 # Tap
 
-[Website](https://porthole-dev.github.io/porthole/) · [Downloads](https://porthole-dev.github.io/porthole/downloads/) · [Device support](https://porthole-dev.github.io/porthole/devices/)
+[Website](https://porthole-dev.github.io/porthole/) · [Downloads](https://porthole-dev.github.io/porthole/images/) · [Device support](https://porthole-dev.github.io/porthole/devices/)
 
 Read and write NFC tags, through `org.freedesktop.portal.NFC`.
 
